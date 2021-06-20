@@ -1,0 +1,50 @@
+<head>
+    <meta name="viewport"
+     content="width=device-width, initial-scale=1.0">
+    </head>
+<body (window:resize)="onResize($event)">
+    <div class="row">
+    
+        <div class="col-4"  > <br><br><br><br><br><br><br>
+            <div  class="sticky-top">
+                <div class="list-group">
+                    <button type="button" class="list-group-item list-group-item-action"
+                     *ngFor="let cate of categories$|async" 
+                     routerLink="/" [queryParams]="{category:cate.name}">
+                    {{cate.name}}</button>
+                  </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <mat-grid-list  class="mat-grid-list" [cols]="numOfCol"  rowHeight="500px" gutterSize="1px" >
+                <div  *ngFor="let product of products$|async|keyvalue">
+                    <mat-grid-tile class="mat-grid-tile"
+                    *ngIf="!chosenCategory || (product.value).category==chosenCategory ">
+                        <div 
+                                class="card"  #card>
+                                <img class="card-img-top" [src]="(product.value).imageURL" style="height: 250px;">
+                                <div class="card-body">
+                                  <h1 class="card-title">{{(product.value).title}}</h1>
+                                  <p class="card-text">   {{(product.value).price}} ₪</p>
+                                  <button  [hidden]="getQuantity(product)>0" #btn
+                                   class="btn btn-primary btn-block" 
+                                   (click)="cardInput.counter=1;pushOrders(product);"
+                                   >Add to Cart</button>
+                                    <app-plus-minus  [hidden]="!btn.hidden" #cardInput 
+                                    [counter]="getQuantity(product,cardInput.counter)"
+                                    (inputChange)="update(cardInput,product)">
+                                    </app-plus-minus> 
+                                                                             
+                        </div>
+                    </div>
+                    </mat-grid-tile>
+                </div>
+               </mat-grid-list>
+            
+        </div>
+    </div>   
+</body>
+
+
+
+

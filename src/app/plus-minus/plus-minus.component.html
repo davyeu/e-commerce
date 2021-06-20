@@ -1,0 +1,16 @@
+<div id="plus-minus-input">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <button class="input-group-text" (click)="increase();onChange($event)">
+            <mat-icon>add_circle</mat-icon>
+          </button>
+        </div>
+        <input [(ngModel)]="counter" type="text" class="form-control"  (change)="onChange($event)"
+        #quantity="ngModel" type="number" [min]='0' >
+        <div class="input-group-append" (click)="decrease();onChange($event)">
+          <button class="input-group-text">
+            <mat-icon>remove_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+</div>

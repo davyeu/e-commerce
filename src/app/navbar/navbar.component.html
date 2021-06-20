@@ -1,0 +1,52 @@
+
+<nav class="navbar navbar-expand-sm bg-light">
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+      
+      
+      <ng-template #anonymousUser>
+        <li  *ngIf ="!(auth.user$|async)" class="nav-item">
+          <a class="nav-link" routerLink='/login' >Login</a>
+        </li>
+      </ng-template>
+      
+      <li *ngIf="auth.obsAppUser |async as user;
+      else anonymousUser" class="nav-item" >
+        <div class="row">
+          <div class="col">
+            <div ngbDropdown  class="d-inline-block">
+              <button class="btn btn btn-outline-light text-dark" id="dropdownBasic1" 
+              ngbDropdownToggle>{{user.name}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">    
+                <button ngbDropdownItem routerLink="/my/orders">My Orders</button>
+                <ng-container *ngIf="user.isAdmin" >
+                  <button ngbDropdownItem   routerLink='admin/orders'>Manage Orders</button>
+                  <button ngbDropdownItem  routerLink='admin/products'> Manage Products</button>
+                </ng-container>
+                <button ngbDropdownItem (click)="logOut()" >Log Out</button>
+              </div>
+            </div>
+          </div>
+          </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink='/' >Home</a>
+      </li>
+      <li class="nav-item"*ngIf="orderObs|async|keyvalue as items;">
+        <a class="nav-link" routerLink='/shopping-cart'>
+        <div *ngIf="items.length==0">Shopping Cart</div>
+          <div *ngIf="items.length>0">
+            <span 
+            [matBadge]="orderCnt" matBadgeOverlap="false"
+            matBadgePosition="above after">Shopping Cart</span>
+          </div>
+        </a>
+      </li>   
+    </ul>
+
+  </nav>
+
+  
+    
+  

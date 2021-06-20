@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-md-6">
+        <form #f="ngForm" style="margin-top: 25px;">
+            <div class="form-group">
+
+        <ng-container>
+            <h1>Shipping</h1>
+            <div><label for="name">Name</label> </div>
+            <input ngModel id="name" name="name" #name="ngModel" required
+             class= "form-control">
+             <div class="alert alert-danger" 
+                    *ngIf="name.value=='' && name.touched"> 
+                        title is required</div> 
+        </ng-container>
+
+        <ng-container>
+            <div><label for="Address">Address</label> </div>
+            <input ngModel id="Address" name="address" #address="ngModel" required
+            class= "form-control" [ngModelOptions]="{standalone: true}" >
+        </ng-container> 
+
+        <ng-container>
+            <div><label for="City">City</label> </div>
+            <input ngModel id="City" name="city" #city="ngModel" required
+            class= "form-control" [ngModelOptions]="{standalone: true}">
+        </ng-container>
+
+        <button class="btn btn-primary" (click)="placeOrder()"
+        [disabled]="!f.valid" style="margin-top: 25px;">
+            place order
+        </button>
+
+         </div>
+        </form>
+
+       
+    </div>
+
+    <div class="col-md-6">
+        <div class="card" style="width: 25rem;margin-top: 25px;margin-left: 60px;">
+            <img class="card-img-top">
+            <div class="card-body">
+              <h1 class="card-title">Order Summary</h1>
+               <app-shopping-cart #shoppingCart
+               [displayedColumns]="['product', 'quantity','price']"
+               > {{removeItem(shoppingCart.clearBtnInput)}}
+                {{removeItem(shoppingCart.CheakOutBtnInput)}}
+                </app-shopping-cart>
+            </div>
+          </div>
+        <div>
+</div>
+
+
+

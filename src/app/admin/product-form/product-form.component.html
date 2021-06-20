@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-md-6">
+        <form #f="ngForm" >
+            <div class="form-group">
+                <ng-container name="titleGroup">
+                    <div><label for="title">Title</label> </div>
+                    <input  [(ngModel)]="element.title"  required name="title" id="title" 
+                    #title="ngModel"                    
+                    (keyup)=setTitle(title.value)
+                    class= "form-control"> <!-- addtion to input (change)="log(title)"  -->
+                    <div class="alert alert-danger" 
+                    *ngIf="title.value=='' && title.touched"> 
+                        title is required</div>  
+                </ng-container>
+                <ng-container name="priceGroup">
+                    <div><label for="price">price</label> </div>
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">ש"ח</span>
+                    </div>
+                        <input [(ngModel)]="element.price" required type="number" class= "form-control"
+                        [min]='0' name="price" id="price" 
+                        #price="ngModel"
+                        (keyup)=setPrice(price.value) > <!-- addtion to input (change)="log(price)"  -->
+                     </div>
+                    <div class="alert alert-danger" 
+                    *ngIf="price.value=='' && price.touched"> 
+                        price is required</div>  
+                </ng-container>
+      
+            <ng-container name="selectGroup">
+                <div><label for="select">Category</label> </div>
+                <select  [(ngModel)]="element.category"   required class= "form-control"
+                id="select" name="select"  #select="ngModel"
+                 (change)=setCategory($event.target.value)>
+                 <option *ngIf="element" value="element.category">{{element.category}}</option>
+                    <option  
+                    *ngFor="let category of obsCategories|async| 
+                    keyvalue" 
+                    >{{(category.value).name}}</option> 
+                </select>
+                <div class="alert alert-danger"
+                *ngIf="select.value=='' && select.touched">
+                category is required            
+                </div>
+                </ng-container>
+                <ng-container name="imageURLGroup">
+                    <div><label for="imageURL">imageURL</label> </div>
+                    <input [(ngModel)]="element.imageURL" required url
+                    name="imageURL" id="imageURL" 
+                    #imageURL="ngModel" 
+                    (keyup)=setImage(imageURL.value) 
+                    class= "form-control">
+                    <div class="alert alert-danger" 
+                    *ngIf="imageURL.value=='' && imageURL.touched"> 
+                        imageURL is required</div>  
+                </ng-container>
+            <br><br>
+                <div>
+                    <!--<li *ngIf="obsCategories|async| keyvalue as c">{{log(c)}}</li>-->
+                    <button class="btn btn-primary"
+                    [disabled]="!f.valid" (click)="save()" >Save</button>
+                    <button class="btn btn-danger"
+                    [disabled]="!f.valid || !keyElement" (click)=delete() >Delete</button>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" [src]="imageURL.value">
+            <div class="card-body">
+              <h5 class="card-title">{{title.value}}</h5>
+              <p class="card-text"></p>
+            </div>
+          </div>
+    </div>
+</div>
