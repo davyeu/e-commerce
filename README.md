@@ -1,3 +1,12 @@
+
+# E-shop
+
+this is the angular code for my organic shop website.
+You can watch him [here](https://e-commerce5.web.app/)
+
+for relation diagram of the commpoents at this project, you can watch MS-word "Organic-Shop Code Architecture" attached to this project.
+
+
 # ECommerce
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.4.
