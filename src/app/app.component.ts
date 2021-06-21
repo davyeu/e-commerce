@@ -13,8 +13,8 @@ export class AppComponent {
   constructor(private auth:AuthService,
     private router: Router,private UserService:UserService){
       auth.user$.subscribe(user =>{
-        if (user) {
-          //insert user details to the database
+        if (user) { // if the user is log in
+          //insert user details to the fireBase database and also to the local storage 
           UserService.save(user);
           localStorage.setItem('userId',user.uid);
           

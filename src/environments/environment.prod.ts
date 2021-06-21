@@ -1,3 +1,6 @@
+
+//here we declare on the on our back end.
+// we use firebsae for a backend
 export const environment = {
   production: true,
   firebase: {

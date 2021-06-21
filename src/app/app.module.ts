@@ -46,7 +46,7 @@ import { IpServiceService } from './ip-service.service';
 
 
 
-
+///we list here all the commponent we use in this project.
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +69,9 @@ import { IpServiceService } from './ip-service.service';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebase), 
+    //at the line above we set our production environment to be a firebase.
+    //In this action we determine our back end as firebase no-SQL database.
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AppRoutingModule,
@@ -84,13 +86,19 @@ import { IpServiceService } from './ip-service.service';
     MatCardModule,
     MatBadgeModule,
     HttpClientModule,
+    /*
+    /*The "forRoot" function map each string diplaying at the URL to specefic commponent.
+    Once the user type the specfic string, Angular route to the mapping commponent and display it
+    on the browser.
+    */
     RouterModule.forRoot([
       {path: '',component: HomeComponent},
       {path: 'products', component: ProductsComponent},
       {path: 'shopping-cart', component: ShoppingCartComponent},
       {path: 'check-out',
        component: CheakOutComponent,
-       canActivate: [AuthGuardService]},
+       canActivate: [AuthGuardService]}, 
+       // AuthGuradService prevent unauthorithed user enter to this commponent.
       {path: 'my/orders', component: OrdersComponent,
       canActivate: [AuthGuardService]},
       {path: 'order-success/:id', component:OrderSuccessComponent,
@@ -115,6 +123,11 @@ import { IpServiceService } from './ip-service.service';
       {path: '**', component:NotFoundComponent}
     ])
   ],
+  /* In Provider declartion we register all the dependecies in our project.
+  /* at some classes at this project there is dependcy injection to the service (classes)
+  /* listed below. Namely this services are passed as an argument to some classes (the inject Clasess) .
+  */
+
   providers: [
     AuthService,
     AuthGuardService,
@@ -123,6 +136,6 @@ import { IpServiceService } from './ip-service.service';
     product,
     IpServiceService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent] //after the declaration above we boostrap the "AppComponent"
 })
 export class AppModule { }

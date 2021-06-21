@@ -26,7 +26,7 @@ export class AuthService {
    }
 
   login(){
-    //log in and redirect us to the requested component
+    //log in by Google authentication and redirect us to the requested component 
     let returnUrl= this.route.snapshot.queryParamMap.
     get('returnUrl') || '/';
     localStorage.setItem('returnUrl',returnUrl);
